@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labo d'Hyperfréquences - IsetCom</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Écran d'accueil avec catalogue 3D -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <div class="logo-ring delay"></div>
+                <div class="logo-core">📡</div>
+            </div>
+            <h1 class="main-title">Bienvenue dans le Labo d'Hyperfréquences</h1>
+            <h2 class="subtitle">ISETCom - Visite Virtuelle 3D Interactive</h2>
+            <p class="description">Explorez les équipements de mesure et de communication hyperfréquences de notre laboratoire</p>
+            
+            <!-- Catalogue 3D rotatif -->
+            <div class="catalog-container">
+                <div class="catalog-title">📚 Catalogue des équipements</div>
+                <div class="carousel-3d" id="carousel-3d">
+                    <!-- Les items seront générés par JS -->
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="carousel-prev">◀</button>
+                    <button class="carousel-btn" id="carousel-next">▶</button>
+                </div>
+            </div>
+
+            <button id="start-btn" class="start-button">
+                <span class="btn-text">🚀 Entrer dans le laboratoire</span>
+                <span class="btn-glow"></span>
+            </button>
+            <div class="instructions">
+                <p>🖱️ Cliquez sur les équipements pour les explorer</p>
+                <p>🎮 Utilisez la souris pour orienter la caméra</p>
+            </div>
+        </div>
+        <div class="background-grid"></div>
+    </div>
+
+    <!-- Animation de porte -->
+    <div id="door-animation" class="door-animation hidden">
+        <div class="door door-left"></div>
+        <div class="door door-right"></div>
+        <div class="door-light"></div>
+    </div>
+
+    <!-- Scène 3D -->
+    <div id="scene-container" style="display: none;">
+        <canvas id="lab-canvas"></canvas>
+        
+        <!-- HUD -->
+        <div class="hud">
+            <div class="hud-header">
+                <div class="hud-logo"> ISETCom</div>
+                <div class="hud-title">Labo Hyperfréquences</div>
+                <button id="back-btn" class="back-btn">← Retour</button>
+            </div>
+            
+            <div class="category-nav">
+                <button class="cat-btn active" data-category="all">Tous</button>
+                <button class="cat-btn" data-category="antennes"> Antennes</button>
+                <button class="cat-btn" data-category="sources">⚡ Sources RF</button>
+                <button class="cat-btn" data-category="mesure"> Instruments de mesure</button>
+                <button class="cat-btn" data-category="composants">🔧 Composants & Kits</button>
+                <button class="cat-btn" data-category="connectique">🔌 Connectique</button>
+            </div>
+
+            <div class="minimap">
+                <div class="minimap-title">Plan du labo</div>
+                <div class="minimap-content" id="minimap-content"></div>
+            </div>
+
+            <div class="hint-indicator">
+                <span class="hint-icon">👆</span>
+                <span class="hint-text">Cliquez sur un équipement</span>
+            </div>
+        </div>
+
+        <!-- Panneau d'information -->
+        <div id="info-panel" class="info-panel hidden">
+            <button class="close-panel" id="close-panel">✕</button>
+            <div class="panel-content">
+                <div class="panel-header">
+                    <span class="panel-category" id="panel-category">Catégorie</span>
+                    <h2 id="panel-title">Titre de l'équipement</h2>
+                </div>
+                
+                <div class="panel-gallery">
+                    <div class="gallery-main">
+                        <img id="panel-main-image" src="" alt="Équipement">
+                    </div>
+                    <div class="gallery-thumbs" id="panel-thumbs"></div>
+                </div>
+
+                <div class="panel-tabs">
+                    <button class="tab-btn active" data-tab="description">📋 Description</button>
+                    <button class="tab-btn" data-tab="fonctionnalites">⚙️ Fonctionnalités</button>
+                    <button class="tab-btn" data-tab="pedagogie">🎓 Intérêt pédagogique</button>
+                </div>
+
+                <div class="tab-content active" id="tab-description">
+                    <p id="panel-description"></p>
+                </div>
+                <div class="tab-content" id="tab-fonctionnalites">
+                    <ul id="panel-features"></ul>
+                </div>
+                <div class="tab-content" id="tab-pedagogie">
+                    <p id="panel-pedagogy"></p>
+                </div>
+
+                <div class="panel-nav">
+                    <button class="nav-btn" id="prev-equipment">← Précédent</button>
+                    <button class="nav-btn" id="next-equipment">Suivant →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
